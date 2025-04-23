@@ -2,8 +2,11 @@ package com.example.dialog;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.security.keystore.StrongBoxUnavailableException;
+import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Toast;
@@ -88,4 +91,34 @@ public class MainActivity extends AppCompatActivity {
 
             datePickerDialog.show();
         }
-    };
+    private void showTimePickerDialog() {
+        Calendar calendar = Calendar.getInstance();
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int minute = calendar.get(Calendar.MINUTE);
+
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                Toast.makeText(MainActivity.this,
+                        "Wybrana godzina" + hourOfDay + ":" + minute, Toast.LENGTH_SHORT).show();
+            }
+        }, hour, minute , true);
+
+        timePickerDialog.show();
+    }
+    private void showCustomDialog() {
+            final android.app.Dialog dialog = new android.app.Dialog(this);
+            dialog.setContentView(R.layout.custom_dialog);
+
+        dialog.findViewById(R.id.button5);
+        button btnSubmit = setOnClickListener(View.OnClickListener(); {
+                @Override
+                        public void onClick(View v) {
+                    Toast.makeText(MainActivity.this, "wysłano", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                }
+        });
+        dialog.show();
+    }
+}
+
